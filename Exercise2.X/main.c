@@ -34,17 +34,27 @@
 #pragma config ICS = ICS_PGD            // Comm Channel Select (Use PGC/EMUC and PGD/EMUD)
 
 
-/*
- * 
- */
+
+void myDelay(unsigned int timeInMilliseconds){
+    int i;
+    for( i = 0; i < timeInMilliseconds; i++){
+        int j;
+        for( j = 0; j < 2000; j++){ }
+    }
+}
+
 int main(int argc, char** argv) {
     unsigned int i = 0;
     while(1){
+        /*
         if (i >= 17){
             i = 0;
         }else{
             i++;
         }
+         **/
+        myDelay(20);
     }
+    return 0;
 }
 
