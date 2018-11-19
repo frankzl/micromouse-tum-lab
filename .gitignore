@@ -51,3 +51,4 @@ Module.symvers
 Mkfile.old
 dkms.conf
 /Exercise2.X/nbproject/private/
+/Exercise2.X/dist/default/
