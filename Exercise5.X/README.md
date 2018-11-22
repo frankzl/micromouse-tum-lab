@@ -49,5 +49,62 @@
     - 6 pins operating as pairs
     - 3x PWMxL, PWMxH (low-side and high-side drivers)
 
-## Exercise
+## Programming PWM
+```C
+    clear PTEN  // switch off PWM time base during config
+    set PTCKPS  // choose time base prescalar
+    set PTPER   // set PWM period
+    set PMOD1   // set PWM unit 1 into independent mode
+    set PEN1L   // enable PWM 1 low-side driver
+    set PEN1H   // enable PWM 1 high-side driver
+    set PTEN    // switch on PWM generator
+```
+![alt regi](demo/pwm_registers.png)
 
+- modify pulse width by writing to the duty cycle register **PDC1**
+- period register **PTPER** is only 15 bits wide
+- duty cycle register **PDC1** is 16 bits wide
+
+<img style="float: right;" src="demo/pwm_process.png"/>
+
+## Example
+
+- PWM period is set to 11 cycles (**PTPER = 10**)
+- prescaler is set to 1:1
+- **PDC = 14 and PDC = 15**
+- PWM generator effectively doubles your PWM resolution
+- 100% duty cycle: 
+    - ```PDC = 22  // [2x ( PTPER + 1 )]```
+-  50% duty cycle:
+    - ```PDC = 11```
+- Generally: high resolution by counting to a high value
+
+
+## Exercise
+1. create a *.c and *.h for you PWM functions
+2. write setup PWM()
+    - setup channel one of the PWM generator for edge aligned PWM signals, driving the PWM1L pin which is connected to LED4
+    - PWM frequency = 250Hz
+        - fast enough for 'slow' human eye
+        - set PTPER, PTCKPS
+        - what is the resolution of your PWM system?
+3. Extend program from Exercise 4
+    - keep I/O and Timer1 setup function
+    - add PWM setup functions
+
+    ```C
+    int main(void)
+    {
+        // init all necessary modules
+        gpIOSetup();    // configures your I/O
+        pwmSetup();     // configures PWM generator
+        timer1Setup();  // start T1
+
+        while(1);
+
+        return 0;
+    }
+    ```
+
+4. Given PWM configuration, which value do yyou have to write to the duty cycle register to get a duty cyc
+4. 
