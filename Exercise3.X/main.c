@@ -11,17 +11,34 @@ void myDelay(unsigned int timeInMilliseconds){
     int i;
     for( i = 0; i < timeInMilliseconds; i++){
         int j;
-        for( j = 0; j < 2000; j++){ }
+        for( j = 0; j < 500; j++){ }
     }
+}
+
+void toggleLED1(){
+    LEDLatch = ~ LEDLatch;
+}
+
+void toggleLED2(){
+    LED2Latch = ~ LEDLatch;
 }
 
 int main() {
     
-    gpIOSetup();    
-    ledSetup();
+    gpIOSetup();
+    
+    int frequency = 1;
     
     while(1){
-        myDelay(1);
+        if(frequency == 50){
+            frequency = 0;
+        }
+        myDelay(frequency);
+        toggleLED1();
+        myDelay(frequency);
+        toggleLED2();
+        frequency ++;
+
     }
     return 0;
 }

@@ -5,8 +5,12 @@
 
 #include <xc.h> 
 
-#define LED2Latch LATDbits.LATD1
-#define LED2Port  PORTDbits.RD1
+#define LEDLatch LATDbits.LATD1
+#define LEDTristate TRISDbits.TRISD1
+#define LEDPort  PORTDbits.RD1
+
+#define LED2Latch LATEbits.LATE0
+#define LED2Tristate TRISEbits.TRISE0
 
 void ledSetup();
 

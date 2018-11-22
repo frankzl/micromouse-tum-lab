@@ -4,9 +4,15 @@
 #include "IOSetup.h"
 
 void ledSetup(){
-    LED2Latch = 1;
+    LEDLatch = 0;
+    LEDTristate = 0;
+    
+    // crucial line: PWM pin needs to be disabled
+    PWMCON1bits.PEN1L = 0;
+    LED2Latch = 0;
+    LED2Tristate = 0;
 }
 
 void gpIOSetup(){
-    TRISDbits.TRISD0 = 0;
+    ledSetup();
 }
