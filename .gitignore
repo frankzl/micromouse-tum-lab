@@ -60,3 +60,8 @@ dkms.conf
 /Exercise3.X/dist/default/
 /Exercise5.X/nbproject/private/
 /Exercise6.X/nbproject/private/
+/Exercise2.X/build/
+/Exercise2.X/dist/
+/build/
+/Exercise6.X/build/
+/Exercise6.X/dist/
