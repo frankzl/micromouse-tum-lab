@@ -1,5 +1,6 @@
 #include "Timer1.h"
 #include "UARTSetup.h"
+#include "IOSetup_1.h"
 
 void timer1Setup()
 {
@@ -7,7 +8,10 @@ void timer1Setup()
     TMR1 = 0; //resets the timer to 0
     T1CONbits.TCKPS1 = 1; //choose an appropriate pre-scale value
     T1CONbits.TCKPS0 = 0; //choosing 64
-    PR1 = 12500 - 1; // 50ms value for the period register
+    
+    //set upper time limit (keep in mind that 0 is a cycle too!)
+    PR1 = 19999;
+    
     T1CONbits.TCS = 0;  // choose internal clock 
     T1CONbits.TSYNC = 0; //TSYNC is ignored when using the internal clock
     T1CONbits.TSIDL = 1; //stop timer in idle mode
@@ -24,8 +28,9 @@ void __attribute__((interrupt, auto_psv)) _T1Interrupt(void)
     IFS0bits.T1IF=0; //reset the timer 1 interrupt flag
     
     sendChar(val);
-    
-    if ( val == 'z' ){
+    setLED_R0(~LED2Latch);
+            
+    if ( val >= 'z' ){
         val = 'a';
     }
     

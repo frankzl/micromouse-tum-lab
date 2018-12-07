@@ -1,8 +1,9 @@
 
 #include "Timer1Setup.h"
 #include "IOSetup.h"
+#include "PWMSetup.h"
 
-void Timer1Setup()
+void timer1Setup()
 {
     T1CONbits.TON = 0; //switches the timer off during setup
     TMR1 = 0; //resets the timer to 0
@@ -21,8 +22,15 @@ void Timer1Setup()
 
 void __attribute__((interrupt, auto_psv)) _T1Interrupt(void)
 {
+    static int mytimer = 0;
+    
     IFS0bits.T1IF=0; //reset the timer 1 interrupt flag
-    setLED_R1(~R1_LEDLatch);
+    setLED_R0(~R0_LEDLatch);
+    if(mytimer >= 20*5){
+        changeDC();
+        mytimer = 0;
+    }
+    mytimer ++;
     //LED2Latch = ~LED2Latch; // switch the LED2
     //LED3Latch = ~LED3Latch; // switch the LED3
 }

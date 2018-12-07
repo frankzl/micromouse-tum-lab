@@ -5,16 +5,16 @@
 
 #include <xc.h> 
 
-#define R1_LEDLatch LATDbits.LATD1
-#define R1_LEDTristate TRISDbits.TRISD1
-#define R1_LEDPort  PORTDbits.RD1
+#define R0_LEDLatch LATDbits.LATD1
+#define R0_LEDTristate TRISDbits.TRISD1
+#define R0_LEDPort  PORTDbits.RD1
 
 #define LED2Latch LATEbits.LATE0
 #define LED2Tristate TRISEbits.TRISE0
 
 void ledSetup();
 
-void setLED_R1(int);
+void setLED_R0(int);
 
 void gpIOSetup();
 

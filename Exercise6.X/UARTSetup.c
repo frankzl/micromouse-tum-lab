@@ -6,7 +6,8 @@ void setupUART(){
     
     // select the alternative
     U1MODEbits.ALTIO = 1;
-    U1BRG = 1;
+    U1BRG = 16;
+    
     U1MODEbits.LPBACK = 0;
     U1MODEbits.WAKE = 0;
     U1MODEbits.ABAUD = 0;

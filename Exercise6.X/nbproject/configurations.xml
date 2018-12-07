@@ -6,7 +6,7 @@
                    projectFiles="true">
       <itemPath>UARTSetup.h</itemPath>
       <itemPath>Timer1.h</itemPath>
-      <itemPath>IOSetup.h</itemPath>
+      <itemPath>IOSetup_1.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
