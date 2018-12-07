@@ -65,3 +65,7 @@ dkms.conf
 /build/
 /Exercise6.X/build/
 /Exercise6.X/dist/
+/Exercise4.X/build/
+/Exercise4.X/dist/
+/Exercise3.X/build/
+/Exercise3.X/dist/

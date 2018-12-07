@@ -16,11 +16,12 @@ void myDelay(unsigned int timeInMilliseconds){
 }
 
 void toggleLED1(){
-    LEDLatch = ~ LEDLatch;
+    setLED_R0(~R0_LEDLatch);
+    //R0_LEDLatch = ~ R0_LEDLatch;
 }
 
 void toggleLED2(){
-    LED2Latch = ~ LEDLatch;
+    //LED2Latch = ~ LEDLatch;
 }
 
 int main() {
