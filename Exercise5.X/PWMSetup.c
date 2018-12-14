@@ -11,7 +11,7 @@ void configurePWM()
     
     // choose prescaler=4 and period for 250Hz
     PTCONbits.PTCKPS = 0b01;
-    PTPER = 15999;
+    PTPER = 9999;
       
     // set PWM unit 1 into the independent mode
     PWMCON1bits.PTMOD1;
