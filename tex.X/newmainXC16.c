@@ -7,10 +7,11 @@
 
 #include "xc.h"
 #include "IOSetup.h"
-#include "Timer1Functions.h"
+#include "timer1Functions.h"
 #include "pwm1Functions.h"
-#include "UARTFunctions.h"
-#include "MotorFunctions.h"
+#include "uartFunctions.h"
+#include "motorFunctions.h"
+#include "qeiFunctions.h"
 
 // FOSC
 #pragma config FPR = XT_PLL8            // Primary Oscillator Mode (XT w/PLL 8x)
@@ -74,6 +75,8 @@ int main(void)
     Timer1Setup();  
     
     motorSetup();
+    
+    setupQEI();
     
     changeDC();
     

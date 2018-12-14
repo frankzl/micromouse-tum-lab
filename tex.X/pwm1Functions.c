@@ -1,5 +1,5 @@
 #include "pwm1Functions.h"
-#include "UARTFunctions.h"
+#include "uartFunctions.h"
 
 void pwm1Setup() 
 {

@@ -1,6 +1,6 @@
-#include "Timer1Functions.h"
+#include "timer1Functions.h"
 #include "IOSetup.h"
-#include "UARTFunctions.h"
+#include "uartFunctions.h"
 
 void Timer1Setup()
 {
@@ -22,6 +22,8 @@ void Timer1Setup()
 void __attribute__((interrupt, auto_psv)) _T1Interrupt(void)
 {
     IFS0bits.T1IF=0; //reset the timer 1 interrupt flag
+        WriteIntUART(POSCNT);
+
     //LED2Latch = ~LED2Latch; // switch the LED2
     //LED1Latch = ~LED1Latch; // switch the LED1
     //uartSendChar('a');

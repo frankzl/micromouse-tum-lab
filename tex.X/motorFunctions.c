@@ -1,6 +1,6 @@
 #include <p30F4012.h>
 
-#include "MotorFunctions.h"
+#include "motorFunctions.h"
 
 void motorSetup()
 {

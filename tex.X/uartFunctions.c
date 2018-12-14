@@ -1,8 +1,9 @@
-#include "UARTFunctions.h"
+#include "uartFunctions.h"
 #include "IOSetup.h"
 #include <string.h>
-#include "MotorFunctions.h"
+#include "motorFunctions.h"
 #include "pwm1Functions.h"
+#include <stdio.h>
 
 void uartSetup()
 {
@@ -29,8 +30,19 @@ void WriteUART1 (char data)
 void WriteStringUART1(const char * s)
 {
     while(*s)
-            WriteUART1(*s++);
-} 
+    {
+        while(U1STAbits.UTXBF);
+        WriteUART1(*s++);
+    }
+}
+
+void WriteIntUART( unsigned value )
+{
+    char poscnt[30];
+    sprintf(poscnt, "%u: \n", value);
+    
+    WriteStringUART1(poscnt);
+}
 
 void uartSendChar(char sending_value)
 {

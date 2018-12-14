@@ -14,6 +14,7 @@ void uartSetup();
 void uartSendChar(char sending_value);
 void WriteUART1 (char data);
 void WriteStringUART1(const char * s);
+void WriteIntUART(unsigned value);
 
 void interpret( char* s);
 
