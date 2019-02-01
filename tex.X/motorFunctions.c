@@ -7,7 +7,7 @@ void motorSetup()
     //TRISBbits.TRISB2 = 0;
     //PORTBbits.RB2 = 1;
     
-   // motor pins
+    // motor pins
     // direction A
     TRISBbits.TRISB2 = 0; 
     LATBbits.LATB2 = 1;
