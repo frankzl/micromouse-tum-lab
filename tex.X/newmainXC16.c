@@ -78,7 +78,7 @@ int main(void)
     
     setupQEI();
     
-    changeDC();
+    //setDC(50);
     
     while(1){
         // infinite cycle

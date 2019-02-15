@@ -14,5 +14,13 @@ void setMotorDir( int );
 
 void changeMotorDir();
 
+
+//for h-bridge direction output
+#define DIR_A LATBbits.LATB2
+#define DIR_B LATBbits.LATB3
+
+void motorDrive(int drive_level);
+
+
 #endif	/* MOTORFUNCTIONS_H */
 

@@ -64,7 +64,6 @@ void changeDC(void)
 
 void setDC(int dc) 
 {
-    WriteUART1(dc);
-    PDC1 = (int)(dc*0.01 * maxDC1);
+    PDC1 = (int) ( ( 6 * (dc*0.01 * maxDC1) )/ 7 );
 }
 

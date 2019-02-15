@@ -10,6 +10,7 @@
       <itemPath>uartFunctions.h</itemPath>
       <itemPath>timer1Functions.h</itemPath>
       <itemPath>qeiFunctions.h</itemPath>
+      <itemPath>pidFunctions.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -25,6 +26,7 @@
       <itemPath>timer1Functions.c</itemPath>
       <itemPath>uartFunctions.c</itemPath>
       <itemPath>motorFunctions.c</itemPath>
+      <itemPath>pidFunctions.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

@@ -4,4 +4,6 @@
 
 void setupQEI();
 
-#endif
+void __attribute__((interrupt, auto_psv)) _QEIInterrupt(void);
+
+#endif 

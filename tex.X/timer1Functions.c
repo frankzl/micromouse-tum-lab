@@ -1,6 +1,18 @@
+#include <p30F4012.h>
+#include <stdlib.h>
+
 #include "timer1Functions.h"
 #include "IOSetup.h"
 #include "uartFunctions.h"
+
+#include "qeiFunctions.h"
+#include "pidFunctions.h"
+#include "pwm1Functions.h"
+#include "motorFunctions.h"
+
+extern long xx_xx;
+
+pid_ctrl pid;
 
 void Timer1Setup()
 {
@@ -17,12 +29,41 @@ void Timer1Setup()
     IPC0bits.T1IP = 0b011; //choose interrupt priority
     IEC0bits.T1IE = 1; // enable Timer1 interrupt
     T1CONbits.TON = 1;//switches the Timer 1 on 
+    
+    pid_init(&pid);
 }
 
 void __attribute__((interrupt, auto_psv)) _T1Interrupt(void)
 {
     IFS0bits.T1IF=0; //reset the timer 1 interrupt flag
-        WriteIntUART(POSCNT);
+    
+    int desired = 55;
+    
+    static long old_POSCNT = 0x7FFF;
+    
+    long new_POSCNT = POSCNT + xx_xx;
+    
+    int velocity = ( new_POSCNT - old_POSCNT );
+    
+    int squeeze = pid_process(&pid, velocity - desired);
+    
+    motorDrive(-1*squeeze);
+    
+    /*
+    int dir_change = prev*err;
+    
+    if( err < 0 ){
+        
+        setDC(-1*err);
+    }
+    setDC(err);
+    */
+    
+    WriteIntUART( 2000 + velocity ) ;
+    // WriteIntUART( POSCNT );
+
+    
+    old_POSCNT = new_POSCNT;
 
     //LED2Latch = ~LED2Latch; // switch the LED2
     //LED1Latch = ~LED1Latch; // switch the LED1

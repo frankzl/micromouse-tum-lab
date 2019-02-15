@@ -39,7 +39,7 @@ void WriteStringUART1(const char * s)
 void WriteIntUART( unsigned value )
 {
     char poscnt[30];
-    sprintf(poscnt, "%u: \n", value);
+    sprintf(poscnt, "%u \n", value);
     
     WriteStringUART1(poscnt);
 }
@@ -50,7 +50,7 @@ void uartSendChar(char sending_value)
 }
 
 void __attribute__((interrupt, no_auto_psv)) _U1RXInterrupt(void)
-{
+{   
     static char buffer[10];
     static int flag;
     //char temp_char;
@@ -58,7 +58,7 @@ void __attribute__((interrupt, no_auto_psv)) _U1RXInterrupt(void)
     // clear rx interrupt flag
     IFS0bits.U1RXIF = 0;
     temp_char[0] = U1RXREG;
-    
+        
     if (temp_char[0] == '<') 
     {
         memset(buffer, 0, sizeof buffer);

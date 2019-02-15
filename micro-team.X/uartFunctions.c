@@ -35,6 +35,7 @@ void uartSetup()
     IEC0bits.U1RXIE = 1; // enable receive interupts
     IEC0bits.U1TXIE = 0; // disable transmit interrupts
     
+    
     // U1MODEbits.ALTIO = 1; //alternate the output pin to pin 13
     
     U1MODEbits.UARTEN = 1;  // enable UART

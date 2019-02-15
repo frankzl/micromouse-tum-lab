@@ -1,5 +1,10 @@
+#include <p30F4012.h>
+
+#include "qeiFunctions.h"
 #include "IOSetup.h"
 #include "uartFunctions.h"
+
+long xx_xx;
 
 void setupQEI()
 {
@@ -28,7 +33,9 @@ void setupQEI()
     // set initial counter value and maximum range
     MAXCNT = 0xffff; // set the highest possible time out
     POSCNT = 0x7fff; // set POSCNT into middle of range
-
+    
+    xx_xx = POSCNT;
+    
     // Configure Interrupt controller
     IFS2bits.QEIIF  = 0;
     // clear interrupt flag
@@ -49,11 +56,8 @@ void __attribute__((interrupt, auto_psv)) _QEIInterrupt(void)
     sprintf(poscnt,"%d", POSCNT);
     */
     
-    
-    /*
     if(POSCNT<32768)
-        xx_xx++; // over-run condition caused interrupt
+        xx_xx += 0xffff; // over-run condition caused interrupt
     else
-        xx_xx--; // under-run condition caused interrupt
-     * */
+        xx_xx -= 0xffff; // under-run condition caused interrupt
 }

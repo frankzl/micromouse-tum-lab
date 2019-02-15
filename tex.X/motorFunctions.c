@@ -1,6 +1,7 @@
 #include <p30F4012.h>
 
 #include "motorFunctions.h"
+#include "pwm1Functions.h"
 
 void motorSetup()
 {
@@ -15,6 +16,30 @@ void motorSetup()
     TRISBbits.TRISB3 = 0;
     LATBbits.LATB3 = 0;
 }
+
+void motorDrive(int drive_level)
+{
+    //sanity check for drive_level
+    if (drive_level > 100) drive_level = 100;
+    if (drive_level < -100) drive_level = -100;
+    
+    //set driving direction to h-bridge and speed (duty cycle proportion) to PWM
+    if (drive_level >= 0)
+    {
+        DIR_A = 1;
+        DIR_B = 0;
+        setDC(drive_level);
+    }
+    
+    else
+    {
+        DIR_A = 0;
+        DIR_B = 1;
+        setDC(-1*drive_level);
+
+    }
+}
+
 
 
 void setMotorDir( int direction )
