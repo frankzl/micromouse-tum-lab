@@ -26,15 +26,15 @@ void motorDrive(int drive_level)
     //set driving direction to h-bridge and speed (duty cycle proportion) to PWM
     if (drive_level >= 0)
     {
-        DIR_A = 1;
-        DIR_B = 0;
+        DIR_A = 0;
+        DIR_B = 1;
         setDC(drive_level);
     }
     
     else
     {
-        DIR_A = 0;
-        DIR_B = 1;
+        DIR_A = 1;
+        DIR_B = 0;
         setDC(-1*drive_level);
 
     }

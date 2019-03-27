@@ -5,6 +5,8 @@
 #include "pwm1Functions.h"
 #include <stdio.h>
 
+static pause_flag = 0;
+
 void uartSetup()
 {
     U1MODEbits.UARTEN = 0; // disable UART during config
@@ -24,7 +26,9 @@ void uartSetup()
 }
 void WriteUART1 (char data)
 {
-    U1TXREG = data;
+    if(!pause_flag){
+        U1TXREG = data;
+    }
 }
 
 void WriteStringUART1(const char * s)
@@ -89,8 +93,8 @@ void interpret( char* command ){
         case '-':
             motorDir = 0;
             break;
-            
-        default: 
+        default:
+            pause_flag = ~pause_flag;
             break;
     }
     

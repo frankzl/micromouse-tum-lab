@@ -37,36 +37,29 @@ void __attribute__((interrupt, auto_psv)) _T1Interrupt(void)
 {
     IFS0bits.T1IF=0; //reset the timer 1 interrupt flag
     
-    int desired = 55;
+    int desired = 27;
     
     static long old_POSCNT = 0x7FFF;
     
     long new_POSCNT = POSCNT + xx_xx;
     
     int velocity = ( new_POSCNT - old_POSCNT );
-    
-    int squeeze = pid_process(&pid, velocity - desired);
-    
-    motorDrive(-1*squeeze);
-    
-    /*
-    int dir_change = prev*err;
-    
-    if( err < 0 ){
-        
-        setDC(-1*err);
+    // initially the velocity might be gibberish when the motor is still standing
+    if (velocity > 80 || velocity < -80){
+        velocity = 0;
     }
-    setDC(err);
-    */
-    
-    WriteIntUART( 2000 + velocity ) ;
-    // WriteIntUART( POSCNT );
 
+    int err = (desired - velocity);
+    
+    int squeeze = (int) (pid_process(&pid, (float) err));
+    
+    motorDrive(squeeze);
+    
+    static int counter = 0;
+    if(counter < 100){
+        WriteIntUART( 2000 + velocity ) ;
+        counter++;
+    }
     
     old_POSCNT = new_POSCNT;
-
-    //LED2Latch = ~LED2Latch; // switch the LED2
-    //LED1Latch = ~LED1Latch; // switch the LED1
-    //uartSendChar('a');
-    //LED3Latch = ~LED3Latch; // switch the LED3
 }
